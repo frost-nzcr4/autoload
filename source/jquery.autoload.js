@@ -11,7 +11,7 @@ var Autoload = {
 		var collection = $("link[rel=stylesheet]");
 		var path = options.basePath + options.cssPath + file;
 
-		for (var i = 0; i < collection.length; i++) {
+		for (var i in collection) {
 			if (path == collection[i].href) {
 				// is loaded
 				return true;
@@ -38,7 +38,7 @@ var Autoload = {
 		var reg = eval("/^(.*)" + baseFile + "$/");
 		var path = null;
 
-		for (var i = 0; i < collection.length; i++) {
+		for (var i in collection) {
 			if (null === path) {
 				var p = reg.exec(collection[i].src);
 				if (null !== p) {
@@ -107,7 +107,7 @@ $.autoload = {
 			names = [names];
 		}
 
-		for (i in names) {
+		for (var i in names) {
 			Autoload.js(names[i], options);
 		}
 	}
