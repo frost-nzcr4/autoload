@@ -86,7 +86,7 @@ var Autoload = {
 $.autoload = {
 	css: function(names, options) {
 		var basePath = Autoload.findPath(options.baseFile);
-		var cssPath = options.cssPath ? options.cssPath : "css/";
+		var cssPath = (undefined === options.cssPath) ? "css/" : options.cssPath;
 		options = {"basePath": basePath, "cssPath": cssPath};
 
 		if ("string" === typeof names) {
@@ -100,7 +100,7 @@ $.autoload = {
 
 	js: function(names, options) {
 		var basePath = Autoload.findPath(options.baseFile);
-		var jsPath = options.jsPath ? options.jsPath : "plugins/";
+		var jsPath = (undefined === options.jsPath) ? "plugins/" : options.jsPath;
 		options = {"basePath": basePath, "jsPath": jsPath};
 
 		if ("string" === typeof names) {
