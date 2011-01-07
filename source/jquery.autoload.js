@@ -12,7 +12,7 @@ var Autoload = {
 		var path = options.basePath + options.cssPath + file;
 
 		for (var i in collection) {
-			if (path == collection[i].href) {
+			if (path === collection[i].href) {
 				// is loaded
 				return true;
 			}
@@ -56,8 +56,8 @@ var Autoload = {
 		var collection = $("script");
 		var path = options.basePath + options.jsPath + file;
 
-		for (var i = 0; i < collection.length; i++) {
-			if (path == collection[i].src) {
+		for (var i in collection) {
+			if (path === collection[i].src) {
 				// is loaded
 				return true;
 			}
@@ -93,7 +93,7 @@ $.autoload = {
 			names = [names];
 		}
 
-		for (i in names) {
+		for (var i = 0; i < names.length; i++) {
 			Autoload.css(names[i], options);
 		}
 	},
@@ -107,7 +107,7 @@ $.autoload = {
 			names = [names];
 		}
 
-		for (var i in names) {
+		for (var i = 0; i < names.length; i++) {
 			Autoload.js(names[i], options);
 		}
 	}
