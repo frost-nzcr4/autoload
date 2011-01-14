@@ -68,8 +68,8 @@ var Autoload = {
 			url: path,
 			dataType: "script",
 			success: function(data, textStatus, XMLHttpRequest) {
-				if (options.success) {
-					options.success;
+				if (options.successCallback) {
+					options.successCallback();
 				}
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -99,9 +99,8 @@ $.autoload = {
 	},
 
 	js: function(names, options) {
-		var basePath = Autoload.findPath(options.baseFile);
-		var jsPath = (undefined === options.jsPath) ? "plugins/" : options.jsPath;
-		options = {"basePath": basePath, "jsPath": jsPath};
+		options.basePath = Autoload.findPath(options.baseFile);
+		options.jsPath = (undefined === options.jsPath) ? "plugins/" : options.jsPath;
 
 		if ("string" === typeof names) {
 			names = [names];
