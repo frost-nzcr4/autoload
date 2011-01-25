@@ -20,13 +20,24 @@
 				}
 			}
 
-			element = $("<link/>").attr({
-				"href":		path,
-				"media":	"all",
-				"rel":		"stylesheet",
-				"type":		"text/css"
-			});
-			$("head").append(element);
+			if ($.browser.msie) {
+				/*
+					<style> element
+					var styleSheet = document.createElement('STYLE');
+					document.documentElement.firstChild.appendChild(styleSheet);
+				*/
+				element = window.document.createStyleSheet(path);
+				$(element).attr({
+					"media":	"all"
+				});
+			} else {
+				element = $("<link/>").attr({
+					"href":		path,
+					"media":	"all",
+					"rel":		"stylesheet",
+					"type":		"text/css"
+				}).appendTo("head");
+			}
 
 			return true;
 		},
