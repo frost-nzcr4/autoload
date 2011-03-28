@@ -14,7 +14,7 @@
 				i;
 
 			for (i = 0; i < collection.length; i += 1) {
-				if (path === this.href) {
+				if (path === collection[i].href) {
 					// is loaded
 					return true;
 				}
@@ -103,9 +103,24 @@
 	 */
 	$.autoload = {
 		css: function (names, options) {
-			var basePath = Autoload.findPath(options.baseFile),
+			var basePath,
 				cssPath = (undefined === options.cssPath) ? "css/" : options.cssPath,
+				basePathToBaseFile,
+				found,
 				i;
+
+			if (undefined === options.basePath) {
+				basePath = Autoload.findPath(options.baseFile);
+			} else {
+				basePathToBaseFile = Autoload.findPath(options.baseFile);
+				found = basePathToBaseFile.match(/https?\:\/\/[^\/]+/);
+
+				if (found[0]) {
+					basePath = found[0] + options.basePath;
+				} else {
+					basePath = options.basePath;
+				}
+			}
 
 			options = {"basePath": basePath, "cssPath": cssPath};
 
